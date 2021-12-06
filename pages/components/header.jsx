@@ -3,11 +3,11 @@ import Link from 'next/link';
 const Header =()=>{
 
   // const doc= document;
-  if(document.readyState=="complete"){
-    document.addEventListener("touchend",()=>{
-      document.getElementById("res-menu").style.display="none";
-    }); 
-  }
+  // if(document.readyState=="complete"){
+  //   document.addEventListener("touchend",()=>{
+  //     document.getElementById("res-menu").style.display="none";
+  //   }); 
+  // }
 
   const toggle=()=>{
     const menu=document.getElementById("res-menu");
