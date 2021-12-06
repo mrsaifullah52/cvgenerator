@@ -2,6 +2,13 @@ import Link from 'next/link';
 
 const Header =()=>{
 
+  // const doc= document;
+  if(document.readyState=="complete"){
+    document.addEventListener("touchend",()=>{
+      document.getElementById("res-menu").style.display="none";
+    }); 
+  }
+
   const toggle=()=>{
     const menu=document.getElementById("res-menu");
     if(menu.style.display=="block"){
@@ -22,7 +29,9 @@ const Header =()=>{
     <header className="bg-indigo-900">
       <div className="mycontainer flex flex-row justify-between relative">
         <div className="flex flex-col md:flex-row lg:flex-row items-center">
-          <a to="/" className="text-white font-mono font-black text-xl md:4xl">CVGenerator</a>
+          <Link href="/">
+            <a className="text-white font-mono font-black text-xl md:4xl">CVGenerator</a>
+          </Link>
           
           <nav className="hidden bg-indigo-900 md:ml-16 md:block lg:block">
             <ul className="flex flex-col md:flex-row lg:flex-row items-center">
@@ -36,8 +45,8 @@ const Header =()=>{
         </div>
 
         {/* responsive navbar */}
-        <nav className="absolute top-16 left-0 w-max hidden" id="res-menu">
-          <ul className="flex flex-col items-center justify-between">
+        <nav className="absolute top-16 w-max bg-indigo-900 left-0 w-max hidden z-10" id="res-menu">
+          <ul className="flex flex-col  items-center justify-between">
             {
               navlinks.map((links, key)=>{
                 return <List props={links} key={key}/>
@@ -53,14 +62,16 @@ const Header =()=>{
         </button>
 
       </div>
+
+      <div className="line w-screen bg-white" style={{height:"1px"}}></div>
     </header>
   </>);
 }
 
 const List=({props})=>{
-  return<li className="bg-indigo-900">
+  return<li>
     <Link href={props.url}>
-      <a className="text-white font-medium mx-1 px-4 py-2 hover:bg-indigo-500
+      <a className="inline-block text-white font-medium mx-1 px-4 py-2 hover:bg-indigo-500
                     transition ease-in-out duration-700 rounded-md">{props.name}</a>
     </Link>
   </li>
