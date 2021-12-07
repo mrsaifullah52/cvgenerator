@@ -1,8 +1,10 @@
+import Cvdisplay from "./components/cvdisplay"
 import Header from "./components/header"
 
 const Resumes =()=>{
   return<>
-       <Header/>
+      <Header/>
+      <Cvdisplay/>
   </>
 }
 export default Resumes

@@ -1,12 +1,12 @@
 import Header from "./components/header"
 import Jumbotrun from "./components/jumbotrun"
-import Cvdisplay from "./components/cvdisplay"
+import Homepage from "./components/homepage"
 
 function index() {
   return<>
     <Header/>
     <Jumbotrun/>
-    <Cvdisplay/>
+    <Homepage/>
   </>
 }
 

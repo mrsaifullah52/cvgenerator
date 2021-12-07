@@ -26,16 +26,15 @@ const Cvdisplay=()=>{
 }
 
 const Card=({props})=>{
-  return<div className="has-tooltip w-72 border-2 border-indigo-400 rounded-md shadow-lg p-4 mx-1 my-2
-          transition duration-700 ease-in-out ">
+  return<div className="has-tooltip w-72 border-2 border-indigo-400 rounded-md shadow-lg p-4 mx-1 my-2 ">
     
     <div className="" id="text">
       <h4 className="text-center font-bold text-lg text-indigo-500 py-6 md:py-6 ">{props.title}</h4>
     </div>
     
     <div className="flex flex-row justify-center items-center py-4 md:py-3 text-center" id="actions">
-      <a href={props.link} className="btn-primary">Perview</a>
-      <a href={props.link} className="btn-secondary">Select</a>
+      <a href={`${props.link}`} target="_blank" className="btn-primary">Perview</a>
+      <a href={`cv/${props.link}`} className="btn-secondary">Select</a>
     </div> 
   </div>
 }
