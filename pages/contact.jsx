@@ -1,6 +1,8 @@
+import Header from "./components/header"
+
 const Contact =()=>{
   return<>
-    <h2>contact</h2>
+    <Header/>
   </>
 }
 export default Contact

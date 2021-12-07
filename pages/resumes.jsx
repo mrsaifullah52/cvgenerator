@@ -1,6 +1,8 @@
+import Header from "./components/header"
+
 const Resumes =()=>{
   return<>
-    <h2>resumes</h2>
+       <Header/>
   </>
 }
 export default Resumes

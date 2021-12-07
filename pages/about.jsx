@@ -1,6 +1,8 @@
+import Header from "./components/header"
+
 const About =()=>{
   return<>
-    <h2>about</h2>
+    <Header/>
   </>
 }
 export default About
