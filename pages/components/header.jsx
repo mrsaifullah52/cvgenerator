@@ -1,21 +1,11 @@
 import Link from 'next/link';
-import {useEffect} from 'react';
+import {useState} from 'react';
 
 const Header =()=>{
-
-  useEffect(() => {
-    document.addEventListener("touchend",function(){
-      document.getElementById("res-menu").style.display="none";
-    })
-  }, []);
+  const [active,setActive]=useState(false);
 
   const toggle=()=>{
-    const menu=document.getElementById("res-menu");
-    if(menu.style.display=="block"){
-      menu.style.display="none"
-    }else{
-      menu.style.display="block"
-    }
+    setActive(!active);
   }
 
   const navlinks=[
@@ -56,8 +46,8 @@ const Header =()=>{
       <div className="line w-screen bg-white" style={{height:"1px"}}></div>
 
       {/* responsive navbar */}
-      <nav className="bg-indigo-900 z-10 absolute w-screen pb-4 transition ease-in-out hidden" id="res-menu">
-        <ul className="p-6 flex flex-col  items-center justify-between">
+      <nav className={`${active?'':'hidden'} bg-indigo-900 z-10 absolute w-screen pb-4`} id="res-menu">
+        <ul className={`p-6 flex flex-col  items-center justify-between`}>
           {
             navlinks.map((links, key)=>{
               return <List props={links} key={key}/>
