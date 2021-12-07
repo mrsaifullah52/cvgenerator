@@ -1,13 +1,13 @@
 import Link from 'next/link';
+import {useEffect} from 'react';
 
 const Header =()=>{
 
-  // const doc= document;
-  // if(document.readyState=="complete"){
-  //   document.addEventListener("touchend",()=>{
-  //     document.getElementById("res-menu").style.display="none";
-  //   }); 
-  // }
+  useEffect(() => {
+    document.addEventListener("touchend",function(){
+      document.getElementById("res-menu").style.display="none";
+    })
+  }, []);
 
   const toggle=()=>{
     const menu=document.getElementById("res-menu");
@@ -44,16 +44,7 @@ const Header =()=>{
           </nav>
         </div>
 
-        {/* responsive navbar */}
-        <nav className="absolute top-16 w-max bg-indigo-900 left-0 w-max hidden z-10" id="res-menu">
-          <ul className="flex flex-col  items-center justify-between">
-            {
-              navlinks.map((links, key)=>{
-                return <List props={links} key={key}/>
-              })
-            }
-          </ul>
-        </nav>
+
 
         <button onClick={toggle} className="block md:hidden lg:hidden bg-white rounded-md p-1 h-8">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 bg-transparent text-indigo-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,17 +53,26 @@ const Header =()=>{
         </button>
 
       </div>
-
       <div className="line w-screen bg-white" style={{height:"1px"}}></div>
+
+      {/* responsive navbar */}
+      <nav className="bg-indigo-900 z-10 absolute w-screen pb-4 transition ease-in-out hidden" id="res-menu">
+        <ul className="p-6 flex flex-col  items-center justify-between">
+          {
+            navlinks.map((links, key)=>{
+              return <List props={links} key={key}/>
+            })
+          }
+        </ul>
+      </nav>
     </header>
   </>);
 }
 
 const List=({props})=>{
-  return<li>
+  return<li className="hover:bg-indigo-500 w-full transition ease-in-out duration-700 rounded-md">
     <Link href={props.url}>
-      <a className="inline-block text-white font-medium mx-1 px-4 py-2 hover:bg-indigo-500
-                    transition ease-in-out duration-700 rounded-md">{props.name}</a>
+      <a className="block text-white font-medium px-4 py-2">{props.name}</a>
     </Link>
   </li>
 }
