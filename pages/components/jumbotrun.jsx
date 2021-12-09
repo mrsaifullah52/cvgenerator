@@ -5,7 +5,7 @@ const Jumboturn = ()=>{
       >
       <div className="mycontainer">
         <div className="transform translate-y-10 md:translate-y-20">
-          <h2 className="text-indigo-900 font-black text-2xl md:text-4xl">CV Generator</h2>
+          <h2 className="text-indigo-900 font-black text-2xl md:text-6xl">CV Generator</h2>
           <p className="text-white">Online Free of Cost CV Generator!</p>
         </div>
       </div>

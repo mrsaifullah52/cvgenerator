@@ -1,4 +1,5 @@
 import {useRouter} from 'next/router';
+import Edit from '../components/edit';
 import Header from '../components/header';
 
 const Cvform = ()=>{
@@ -7,7 +8,8 @@ const Cvform = ()=>{
 
   return <>
     <Header/>
-    page: {page}
+    {/* page: {page} */}
+    <Edit/>
   </>
 }
 
