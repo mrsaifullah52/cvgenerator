@@ -16,5 +16,18 @@
     @apply flex flex-col w-full m-1 w-full md:w-1/2 lg:w-1/2
   }
 
+  /* resumes page */
+  #text{
+    @apply block
+  }
+  #actions{
+    @apply hidden
+  }
+  .has-tooltip:hover #actions{
+    @apply block z-10
+  }
+  .has-tooltip:hover #text{
+    @apply hidden
+  }
 
 @tailwind utilities;
