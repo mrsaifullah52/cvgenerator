@@ -1,13 +1,17 @@
 import { Formik, Form, Field, useFormik, FieldArray } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faPhone, faCalendarDay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faCalendarDay,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { jsPDF } from "jspdf";
 import { useRef } from "react";
+import html2canvas from "html2canvas";
+import * as htmlToImage from "html-to-image";
 
 const Edit = () => {
-  // jsPDF
-  const doc = new jsPDF();
   const output = useRef();
 
   // inital values
@@ -80,7 +84,7 @@ const Edit = () => {
   // experience
   const addExp = (values, setValues) => {
     const experience = [...values.experience];
-    experience.push({ title: "", name: "", start: "", end: "" });
+    experience.push({ title: "", name: "", start: "", end: "", details: "" });
     setValues({ ...values, experience });
   };
   const remExp = (e, values, setValues) => {
@@ -100,27 +104,51 @@ const Edit = () => {
     setValues({ ...values, project });
   };
 
+  // display image in browser
+  const showImg = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const dpimg = document.getElementById("dpimg");
+      dpimg.src = URL.createObjectURL(file);
+    }
+  };
+
   return (
     <section className="mycontainer">
-      <div className="flex flex-col md:flex-row lg:flex-row justify-between">
+      <div className="relative">
         <Formik
           initialValues={initialValues}
           onSubmit={(values) => {
-            // console.log();
+            setTimeout(function () {
+              htmlToImage.toCanvas(output.current).then((canvas) => {
+                var imgData = canvas;
+                var pdf = new jsPDF("p", "mm", "a4");
+                var pageWidth = pdf.internal.pageSize.getWidth();
+                var pageHeight = pdf.internal.pageSize.getHeight();
+                var imageWidth = canvas.width;
+                var imageHeight = canvas.height;
 
-            doc.html(output.current, {
-              callback: function (doc) {
-                doc.save();
-              },
-              x: 10,
-              y: 10,
+                var ratio =
+                  imageWidth / imageHeight >= pageWidth / pageHeight
+                    ? pageWidth / imageWidth
+                    : pageHeight / imageHeight;
+                pdf.addImage(
+                  imgData,
+                  "JPEG",
+                  0,
+                  0,
+                  imageWidth * ratio,
+                  imageHeight * ratio
+                );
+                pdf.save(`${values.fname}-CV.pdf`);
+              });
             });
           }}
         >
           {({ errors, values, touched, setValues }) => (
             <>
               {/* take data */}
-              <Form className="w-full md:w-1/2 lg:w-1/2 h-screen">
+              <Form className="w-full">
                 {/* personal */}
                 <fieldset className="border-2 border-indigo-900 p-4">
                   <legend className="text-lg font-semibold text-indigo-500">
@@ -206,6 +234,8 @@ const Edit = () => {
                       name="promage"
                       placeholder="Select Image"
                       className="w-full form-file p-1 rounded-md shadow-md border-none"
+                      onChange={showImg}
+                      accept="image/*"
                     />
                   </div>
                 </fieldset>
@@ -522,7 +552,7 @@ const Edit = () => {
                               <label htmlFor="proDetails">Job Details:</label>
                               <textarea
                                 id="proDetails"
-                                name={`experience.${i}.detail`}
+                                name={`experience.${i}.details`}
                                 placeholder="Details about your work!"
                                 className="w-full form-textarea rounded-md shadow-md border-none"
                               ></textarea>
@@ -588,8 +618,15 @@ const Edit = () => {
                                 Project Details:
                               </label>
                               <textarea
+                                type="textarea"
                                 id="proDetails"
-                                name={`project.${i}.detail`}
+                                name={`project.${i}.details`}
+                                value={values.project[i].details}
+                                onChange={(e) => {
+                                  // setValues((...prev) => {
+                                  //   values.project[i].details = e.target.value;
+                                  // });
+                                }}
                                 placeholder="Online Free of Cost CV Generator!"
                                 className="w-full form-textarea rounded-md shadow-md border-none"
                               ></textarea>
@@ -624,64 +661,252 @@ const Edit = () => {
                     Reset
                   </button>
                   <button type="submit" className="btn-primary">
-                    Submit
+                    Download PDF
                   </button>
                 </div>
               </Form>
 
               {/* output */}
-              <div
-                className="w-full md:w-1/2 lg:w-1/2 h-screen"
-                id="output"
-                ref={output}
-              >
-                <header className="p-4 flex flex-row justify-between bg-gray-300 w-full items-center">
-                  <div className="w-1/2 flex flex-row items-center justify-around">
-                    {values.proImage !== "" ? (
-                      <>
-                        <div className="p-1 bg-white border-indigo-500 border-2 rounded-full w-24 overflow-hidden">
-                          <img src={values.proImage} alt="profile image" />
-                        </div>
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    <div className="flex flex-col">
-                      <h1 className="font-bold text-xl text-indigo-500">{`${values.fname} ${values.lname}`}</h1>
-                      <h3 className="font-medium text-sm">{values.role}</h3>
+              <h2 className="text-center text-2xl font-bold my-4 text-indigo-900 bg-white">
+                Output of Your Resume
+              </h2>
+              <div className="w-full bg-white" id="output" ref={output}>
+                <header className="p-4 pt-12 flex flex-row justify-between bg-gray-300 w-full items-center border-r-4 border-indigo-500">
+                  <div className="w-1/2 flex flex-row items-center ml-20">
+                    <div className="bg-white border-indigo-500 border-2 rounded-full w-36 h-36 overflow-hidden">
+                      <img
+                        src={values.proImage}
+                        id="dpimg"
+                        alt="profile image"
+                        className="w-full h-full"
+                      />
+                    </div>
+
+                    <div className="flex flex-col ml-4">
+                      <h1 className="font-bold text-5xl text-indigo-500">{`${values.fname} ${values.lname}`}</h1>
+                      <h3 className="font-medium text-2xl">{values.role}</h3>
                     </div>
                   </div>
 
-                  <ul className="flex flex-col">
+                  <ul className="flex flex-col mr-20">
                     <li className="flex flex-row justify-start items-center">
                       <FontAwesomeIcon
-                        className="text-indigo-500 mr-1"
+                        className="text-indigo-500 mr-1 text-2xl"
                         icon={faEnvelope}
                       />
-                      <span className="font-medium text-sm">
+                      <span className="font-medium text-xl">
                         {values.email}
                       </span>
                     </li>
                     <li className="flex flex-row justify-start items-center">
                       <FontAwesomeIcon
-                        className="text-indigo-500 mr-1"
+                        className="text-indigo-500 mr-1 text-2xl"
                         icon={faPhone}
                       />
-                      <span className="font-medium text-sm">
+                      <span className="font-medium text-xl">
                         {values.phone}
                       </span>
                     </li>
 
                     <li className="flex flex-row justify-start items-center">
                       <FontAwesomeIcon
-                        className="text-indigo-500 mr-1"
+                        className="text-indigo-500 mr-1 text-2xl"
                         icon={faCalendarDay}
                       />
-                      <span className="font-medium text-sm">{values.dob}</span>
+                      <span className="font-medium text-xl">{values.dob}</span>
                     </li>
                   </ul>
                 </header>
                 <div className="bg-indigo-500 h-1 w-full"></div>
+
+                {/* experience */}
+                {values.experience.length > 0 ? (
+                  <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+                    <div className="w-1/4">
+                      <h2 className="font-bold text-2xl text-indigo-500 text-center">
+                        Experience:
+                      </h2>
+                    </div>
+                    <div className="w-3/4 flex flex-col">
+                      {values.experience.length >= 0
+                        ? values.experience.map((val) => {
+                            return (
+                              <div key={val.title} className="py-2">
+                                <p className="uppercase font-medium text-base">
+                                  <span className="uppercase font-semibold text-lg">
+                                    {val.title} - &nbsp;
+                                  </span>
+                                  {val.name}
+                                </p>
+                                <p className="text-base">
+                                  <span className="font-normal">
+                                    <b>Started at:</b> {val.start}
+                                    <b> End at: </b>
+                                    {val.end}
+                                  </span>
+                                </p>
+                                <p>{val.details}</p>
+                                <hr className="bg-indigo-500 h-0.5" />
+                              </div>
+                            );
+                          })
+                        : ""}
+                    </div>
+                  </section>
+                ) : (
+                  ""
+                )}
+
+                {/* skills */}
+                {values.skill.length > 0 ? (
+                  <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+                    <div className="w-1/4">
+                      <h2 className="font-bold text-2xl text-indigo-500 text-center">
+                        Key Skills:
+                      </h2>
+                    </div>
+                    <div className="w-3/4 flex flex-row flex-wrap">
+                      {values.skill.map((val) => {
+                        return (
+                          <div
+                            key={val.name}
+                            className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                          >
+                            <p className="uppercase font-medium text-base">
+                              {val.name}
+                            </p>
+                            <p className="uppercase text-xs">{val.level}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ) : (
+                  ""
+                )}
+
+                {/* education */}
+                {values.education.length > 0 ? (
+                  <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+                    <div className="w-1/4">
+                      <h2 className="font-bold text-2xl text-indigo-500 text-center">
+                        Education:
+                      </h2>
+                    </div>
+                    <div className="w-3/4 flex flex-col">
+                      {values.education.length >= 0
+                        ? values.education.map((val) => {
+                            return (
+                              <div key={val.degree} className="py-2">
+                                <p className="uppercase font-medium text-base">
+                                  <span className="uppercase font-semibold text-lg">
+                                    {val.degree} - &nbsp;
+                                  </span>
+                                  {val.degreeInstitution}
+                                </p>
+                                <p className="text-base">
+                                  <span className="font-normal">
+                                    <b>Started at:</b> {val.degreeStart}
+                                    <b> End at: </b>
+                                    {val.degreeEnd}
+                                  </span>
+                                </p>
+                                <hr className="bg-indigo-500 h-0.5" />
+                              </div>
+                            );
+                          })
+                        : ""}
+                    </div>
+                  </section>
+                ) : (
+                  ""
+                )}
+
+                {/* hobbies */}
+                {values.hoby.length > 0 ? (
+                  <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+                    <div className="w-1/4">
+                      <h2 className="font-bold text-2xl text-indigo-500 text-center">
+                        Hobbies:
+                      </h2>
+                    </div>
+                    <div className="w-3/4 flex flex-row flex-wrap">
+                      {values.hoby.map((val) => {
+                        return (
+                          <div
+                            key={val.name}
+                            className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                          >
+                            <p className="uppercase font-medium text-base">
+                              {val.name}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ) : (
+                  ""
+                )}
+
+                {/* languages */}
+                {values.language.length > 0 ? (
+                  <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+                    <div className="w-1/4">
+                      <h2 className="font-bold text-2xl text-indigo-500 text-center">
+                        Language:
+                      </h2>
+                    </div>
+                    <div className="w-3/4 flex flex-row flex-wrap">
+                      {values.language.map((val) => {
+                        return (
+                          <div
+                            key={val.name}
+                            className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                          >
+                            <p className="uppercase font-medium text-base">
+                              {val.name}
+                            </p>
+                            <p className="uppercase text-xs">{val.level}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ) : (
+                  ""
+                )}
+
+                {/* projects */}
+                {values.project.length > 0 ? (
+                  <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+                    <div className="w-1/4">
+                      <h2 className="font-bold text-2xl text-indigo-500 text-center">
+                        Projects:
+                      </h2>
+                    </div>
+                    <div className="w-3/4 flex flex-col">
+                      {values.project.map((val) => {
+                        return (
+                          <div key={val.name} className="py-2">
+                            <p className="uppercase font-medium text-base">
+                              <span className="uppercase font-semibold text-lg">
+                                {val.name} - &nbsp;
+                              </span>
+                              <a href={val.url} target="_blank" className="">
+                                Check Online
+                              </a>
+                            </p>
+                            <p>{val.details}</p>
+                            <hr className="bg-indigo-500 h-0.5" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ) : (
+                  ""
+                )}
               </div>
             </>
           )}
