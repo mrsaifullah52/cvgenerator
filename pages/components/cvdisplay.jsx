@@ -2,15 +2,12 @@ import Link from "next/link";
 
 const Cvdisplay = () => {
   const cards = [
-    { title: "Content Writer", link: "content-writer" },
-    { title: "Digital Marketer", link: "digital-marketer" },
-    { title: "Drafts Man", link: "drafts-man" },
-    { title: "Front-end Dev", link: "fronend-dev" },
-    { title: "Back-end Dev", link: "backend-dev" },
-    { title: "Full-stack Dev", link: "fullstack-dev" },
-    { title: "Graphic Designer", link: "graphi-designer" },
-    { title: "Computer Operator", link: "computer-operator" },
-    { title: "Accounts Department", link: "account-department" },
+    { title: "Professional", link: "Professional" },
+    { title: "Modern", link: "Modern" },
+    { title: "Simple", link: "Simple" },
+    { title: "Creative", link: "Creative" },
+    { title: "Premium", link: "Premium" },
+    { title: "Classic", link: "Classic" },
   ];
   return (
     <section>
@@ -46,7 +43,7 @@ const Card = ({ props }) => {
         className="flex flex-row justify-center items-center py-4 md:py-3 text-center"
         id="actions"
       >
-        <Link href={props.link}>
+        <Link href={`view/${props.link}`}>
           <a target="_blank" className="btn-primary">
             Perview
           </a>
