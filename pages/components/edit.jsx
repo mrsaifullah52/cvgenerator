@@ -289,6 +289,7 @@ const Edit = () => {
                     <FieldArray name="education">
                       {() =>
                         values.education.map((val, i) => {
+                          console.log(i);
                           return (
                             <div key={i}>
                               <div className="w-full flex flex-col md:flex-row lg:flex-row justify-between">
@@ -347,7 +348,7 @@ const Edit = () => {
 
                               <button
                                 className="btn bg-red-500 text-white"
-                                onClick={(e) => remEdu(e, values, setValues)}
+                                onClick={(e) => remEdu(i, values, setValues)}
                               >
                                 Remove
                               </button>
@@ -409,7 +410,7 @@ const Edit = () => {
 
                               <button
                                 className="btn bg-red-500 text-white"
-                                onClick={(e) => remSkill(e, values, setValues)}
+                                onClick={(e) => remSkill(i, values, setValues)}
                               >
                                 Remove
                               </button>
@@ -453,7 +454,7 @@ const Edit = () => {
 
                               <button
                                 className="btn bg-red-500 text-white"
-                                onClick={(e) => remHoby(e, values, setValues)}
+                                onClick={(e) => remHoby(i, values, setValues)}
                               >
                                 Remove
                               </button>
@@ -517,7 +518,7 @@ const Edit = () => {
 
                               <button
                                 className="btn bg-red-500 text-white"
-                                onClick={(e) => remLang(e, values, setValues)}
+                                onClick={(e) => remLang(i, values, setValues)}
                               >
                                 Remove
                               </button>
@@ -597,17 +598,18 @@ const Edit = () => {
                               </div>
                               <div className="">
                                 <label htmlFor="proDetails">Job Details:</label>
-                                <textarea
+                                <Field
+                                  type="text"
                                   id="proDetails"
-                                  name={`experience.${i}.details`}
                                   placeholder="Details about your work!"
-                                  className="w-full form-textarea rounded-md shadow-md border-none"
-                                ></textarea>
+                                  name={`experience.${i}.details`}
+                                  className="w-full form-textarea rounded-md shadow-md border-none overflow-scroll"
+                                />
                               </div>
 
                               <button
                                 className="btn bg-red-500 text-white"
-                                onClick={(e) => remExp(e, values, setValues)}
+                                onClick={(e) => remExp(i, values, setValues)}
                               >
                                 Remove
                               </button>
@@ -664,24 +666,18 @@ const Edit = () => {
                                 <label htmlFor="proDetails">
                                   Project Details:
                                 </label>
-                                <textarea
-                                  type="textarea"
+                                <Field
+                                  type="text"
                                   id="proDetails"
-                                  name={`project.${i}.details`}
-                                  value={values.project[i].details}
-                                  onChange={(e) => {
-                                    // setValues((...prev) => {
-                                    //   values.project[i].details = e.target.value;
-                                    // });
-                                  }}
                                   placeholder="Online Free of Cost CV Generator!"
-                                  className="w-full form-textarea rounded-md shadow-md border-none"
-                                ></textarea>
+                                  name={`project.${i}.details`}
+                                  className="w-full form-textarea rounded-md shadow-md border-none overflow-scroll"
+                                />
                               </div>
 
                               <button
                                 className="btn bg-red-500 text-white"
-                                onClick={(e) => remPro(e, values, setValues)}
+                                onClick={(e) => remPro(i, values, setValues)}
                               >
                                 Remove
                               </button>
@@ -756,21 +752,6 @@ export default Edit;
 
 // CVHeader
 const Cvheader = ({ values }) => {
-  const sociallist = [
-    {
-      data: values.email,
-      icon: faEnvelope,
-    },
-    {
-      data: values.phone,
-      icon: faPhone,
-    },
-    {
-      data: values.dob,
-      icon: faCalendarDay,
-    },
-  ];
-
   return (
     <>
       <section className="p-4 pt-12 flex flex-row justify-between bg-gray-300 w-full items-center border-r-4 border-indigo-500">
@@ -791,23 +772,30 @@ const Cvheader = ({ values }) => {
         </div>
 
         <ul className="flex flex-col mr-20">
-          {sociallist.map((val, i) => {
-            return <List key={i} val={val} />;
-          })}
+          <li className="flex flex-row justify-start items-center">
+            <FontAwesomeIcon
+              className="text-indigo-500 mr-1 text-2xl"
+              icon={faEnvelope}
+            />
+            <span className="font-medium text-xl">{values.email}</span>
+          </li>
+          <li className="flex flex-row justify-start items-center">
+            <FontAwesomeIcon
+              className="text-indigo-500 mr-1 text-2xl"
+              icon={faPhone}
+            />
+            <span className="font-medium text-xl">{values.phone}</span>
+          </li>
+          <li className="flex flex-row justify-start items-center">
+            <FontAwesomeIcon
+              className="text-indigo-500 mr-1 text-2xl"
+              icon={faCalendarDay}
+            />
+            <span className="font-medium text-xl">{values.dob}</span>
+          </li>
         </ul>
       </section>
     </>
-  );
-};
-const List = (val) => {
-  return (
-    <li className="flex flex-row justify-start items-center">
-      <FontAwesomeIcon
-        className="text-indigo-500 mr-1 text-2xl"
-        icon={val.icon}
-      />
-      <span className="font-medium text-xl">{val.data}</span>
-    </li>
   );
 };
 
@@ -823,10 +811,10 @@ const Education = ({ education }) => {
             </h2>
           </div>
           <div className="w-3/4 flex flex-col">
-            {education >= 0
-              ? education.map((val) => {
+            {education.length >= 0
+              ? education.map((val, i) => {
                   return (
-                    <div key={val.degree} className="py-2">
+                    <div key={i} className="py-2">
                       <p className="uppercase font-medium text-base">
                         <span className="uppercase font-semibold text-lg">
                           {val.degree} - &nbsp;
@@ -910,16 +898,20 @@ const Hobbie = ({ hoby }) => {
             </h2>
           </div>
           <div className="w-3/4 flex flex-row flex-wrap">
-            {hoby.map((val) => {
-              return (
-                <div
-                  key={val.name}
-                  className="p-2 m-1 text-white rounded-xl bg-indigo-500"
-                >
-                  <p className="uppercase font-medium text-base">{val.name}</p>
-                </div>
-              );
-            })}
+            {hoby.length >= 0
+              ? hoby.map((val) => {
+                  return (
+                    <div
+                      key={val.name}
+                      className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                    >
+                      <p className="uppercase font-medium text-base">
+                        {val.name}
+                      </p>
+                    </div>
+                  );
+                })
+              : ""}
           </div>
         </section>
       ) : (
@@ -941,17 +933,21 @@ const Language = ({ language }) => {
             </h2>
           </div>
           <div className="w-3/4 flex flex-row flex-wrap">
-            {language.map((val) => {
-              return (
-                <div
-                  key={val.name}
-                  className="p-2 m-1 text-white rounded-xl bg-indigo-500"
-                >
-                  <p className="uppercase font-medium text-base">{val.name}</p>
-                  <p className="uppercase text-xs">{val.level}</p>
-                </div>
-              );
-            })}
+            {language.length >= 0
+              ? language.map((val) => {
+                  return (
+                    <div
+                      key={val.name}
+                      className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                    >
+                      <p className="uppercase font-medium text-base">
+                        {val.name}
+                      </p>
+                      <p className="uppercase text-xs">{val.level}</p>
+                    </div>
+                  );
+                })
+              : ""}
           </div>
         </section>
       ) : (
@@ -973,22 +969,24 @@ const Project = ({ project }) => {
             </h2>
           </div>
           <div className="w-3/4 flex flex-col">
-            {project.map((val) => {
-              return (
-                <div key={val.name} className="py-2">
-                  <p className="uppercase font-medium text-base">
-                    <span className="uppercase font-semibold text-lg">
-                      {val.name} - &nbsp;
-                    </span>
-                    <a href={val.url} target="_blank" className="">
-                      Check Online
-                    </a>
-                  </p>
-                  <p>{val.details}</p>
-                  <hr className="bg-indigo-500 h-0.5" />
-                </div>
-              );
-            })}
+            {project.length >= 0
+              ? project.map((val) => {
+                  return (
+                    <div key={val.name} className="py-2">
+                      <p className="uppercase font-medium text-base">
+                        <span className="uppercase font-semibold text-lg">
+                          {val.name} - &nbsp;
+                        </span>
+                        <a href={val.url} target="_blank" className="">
+                          Check Online
+                        </a>
+                      </p>
+                      <p>{val.details}</p>
+                      <hr className="bg-indigo-500 h-0.5" />
+                    </div>
+                  );
+                })
+              : ""}
           </div>
         </section>
       ) : (
