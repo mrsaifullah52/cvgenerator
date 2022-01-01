@@ -48,7 +48,7 @@ const Card = ({ props }) => {
             Perview
           </a>
         </Link>
-        <Link href={`cv/${props.link}`}>
+        <Link href={`cv/`}>
           <a className="btn-secondary">Select</a>
         </Link>
       </div>

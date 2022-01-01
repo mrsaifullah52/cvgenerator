@@ -10,7 +10,6 @@ import {
 import { jsPDF } from "jspdf";
 import { useRef } from "react";
 import * as htmlToImage from "html-to-image";
-import Output from "./[cvoutput]";
 
 const Edit = () => {
   const output = useRef();
@@ -715,7 +714,35 @@ const Edit = () => {
                 </Form>
 
                 {/* output */}
-                <Output view={view} values={values} output={output} />
+                <div
+                  ref={view}
+                  className="w-full absolute top-0 left-0 right-0 overflow-scroll invisible"
+                >
+                  <h2 className="text-center text-2xl font-bold my-4 text-indigo-900 ">
+                    Output of Your Resume
+                  </h2>
+                  <div
+                    style={{ width: "1240px" }}
+                    className=" bg-white"
+                    id="output"
+                    ref={output}
+                  >
+                    <Cvheader values={values} />
+                    <div className="bg-indigo-500 h-1 w-full"></div>
+
+                    <Experience experience={values.experience} />
+
+                    <Skill skill={values.skill} />
+
+                    <Education education={values.education} />
+
+                    <Hobbie hoby={values.hoby} />
+
+                    <Language language={values.language} />
+
+                    <Project project={values.project} />
+                  </div>
+                </div>
               </div>
             </>
           )}
@@ -726,3 +753,279 @@ const Edit = () => {
 };
 
 export default Edit;
+
+// CVHeader
+const Cvheader = ({ values }) => {
+  const sociallist = [
+    {
+      data: values.email,
+      icon: faEnvelope,
+    },
+    {
+      data: values.phone,
+      icon: faPhone,
+    },
+    {
+      data: values.dob,
+      icon: faCalendarDay,
+    },
+  ];
+
+  return (
+    <>
+      <section className="p-4 pt-12 flex flex-row justify-between bg-gray-300 w-full items-center border-r-4 border-indigo-500">
+        <div className="w-1/2 flex flex-row items-center ml-20">
+          <div className="bg-white border-indigo-500 border-2 rounded-full w-36 h-36 overflow-hidden">
+            <img
+              src={values.proImage}
+              id="dpimg"
+              alt="profile image"
+              className="w-full h-full"
+            />
+          </div>
+
+          <div className="flex flex-col ml-4">
+            <h1 className="font-bold text-5xl text-indigo-500">{`${values.fname} ${values.lname}`}</h1>
+            <h3 className="font-medium text-2xl">{values.role}</h3>
+          </div>
+        </div>
+
+        <ul className="flex flex-col mr-20">
+          {sociallist.map((val, i) => {
+            return <List key={i} val={val} />;
+          })}
+        </ul>
+      </section>
+    </>
+  );
+};
+const List = (val) => {
+  return (
+    <li className="flex flex-row justify-start items-center">
+      <FontAwesomeIcon
+        className="text-indigo-500 mr-1 text-2xl"
+        icon={val.icon}
+      />
+      <span className="font-medium text-xl">{val.data}</span>
+    </li>
+  );
+};
+
+// Education
+const Education = ({ education }) => {
+  return (
+    <>
+      {education.length > 0 ? (
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+          <div className="w-1/4">
+            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+              Education:
+            </h2>
+          </div>
+          <div className="w-3/4 flex flex-col">
+            {education >= 0
+              ? education.map((val) => {
+                  return (
+                    <div key={val.degree} className="py-2">
+                      <p className="uppercase font-medium text-base">
+                        <span className="uppercase font-semibold text-lg">
+                          {val.degree} - &nbsp;
+                        </span>
+                        {val.degreeInstitution}
+                      </p>
+                      <p className="text-base">
+                        <span className="font-normal">
+                          <b>Started at:</b> {val.degreeStart}
+                          <b> End at: </b>
+                          {val.degreeEnd}
+                        </span>
+                      </p>
+                      <hr className="bg-indigo-500 h-0.5" />
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
+// Experience
+const Experience = ({ experience }) => {
+  return (
+    <>
+      {experience.length > 0 ? (
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+          <div className="w-1/4">
+            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+              Experience:
+            </h2>
+          </div>
+          <div className="w-3/4 flex flex-col">
+            {experience.length >= 0
+              ? experience.map((val) => {
+                  return (
+                    <div key={val.title} className="py-2">
+                      <p className="uppercase font-medium text-base">
+                        <span className="uppercase font-semibold text-lg">
+                          {val.title} - &nbsp;
+                        </span>
+                        {val.name}
+                      </p>
+                      <p className="text-base">
+                        <span className="font-normal">
+                          <b>Started at:</b> {val.start}
+                          <b> End at: </b>
+                          {val.end}
+                        </span>
+                      </p>
+                      <p>{val.details}</p>
+                      <hr className="bg-indigo-500 h-0.5" />
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
+// Hobbies
+const Hobbie = ({ hoby }) => {
+  return (
+    <>
+      {hoby.length > 0 ? (
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+          <div className="w-1/4">
+            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+              Hobbies:
+            </h2>
+          </div>
+          <div className="w-3/4 flex flex-row flex-wrap">
+            {hoby.map((val) => {
+              return (
+                <div
+                  key={val.name}
+                  className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                >
+                  <p className="uppercase font-medium text-base">{val.name}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
+// Languages
+const Language = ({ language }) => {
+  return (
+    <>
+      {language.length > 0 ? (
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+          <div className="w-1/4">
+            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+              Language:
+            </h2>
+          </div>
+          <div className="w-3/4 flex flex-row flex-wrap">
+            {language.map((val) => {
+              return (
+                <div
+                  key={val.name}
+                  className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                >
+                  <p className="uppercase font-medium text-base">{val.name}</p>
+                  <p className="uppercase text-xs">{val.level}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
+// Projects
+const Project = ({ project }) => {
+  return (
+    <>
+      {project.length > 0 ? (
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+          <div className="w-1/4">
+            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+              Projects:
+            </h2>
+          </div>
+          <div className="w-3/4 flex flex-col">
+            {project.map((val) => {
+              return (
+                <div key={val.name} className="py-2">
+                  <p className="uppercase font-medium text-base">
+                    <span className="uppercase font-semibold text-lg">
+                      {val.name} - &nbsp;
+                    </span>
+                    <a href={val.url} target="_blank" className="">
+                      Check Online
+                    </a>
+                  </p>
+                  <p>{val.details}</p>
+                  <hr className="bg-indigo-500 h-0.5" />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
+// Skills
+const Skill = ({ skill }) => {
+  return (
+    <>
+      {skill.length > 0 ? (
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+          <div className="w-1/4">
+            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+              Key Skills:
+            </h2>
+          </div>
+          <div className="w-3/4 flex flex-row flex-wrap">
+            {skill.map((val) => {
+              return (
+                <div
+                  key={val.name}
+                  className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                >
+                  <p className="uppercase font-medium text-base">{val.name}</p>
+                  <p className="uppercase text-xs">{val.level}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
