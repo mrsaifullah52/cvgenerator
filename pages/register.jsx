@@ -11,9 +11,9 @@ const Register = () => {
           backgroundImage:
             "linear-gradient(rgba(139, 92, 246, 0.4),rgba(139, 92, 246, 0.6)),url(imgs/animated.svg)",
         }}
-        className="h-screen pt-16 bg-cover bg-no-repeat"
+        className="h-full md:h-screen py-16 bg-cover bg-no-repeat"
       >
-        <div className="rounded-lg w-1/3 mx-auto bg-bubbles bg-cover bg-no-repeat p-8 shadow-xl ">
+        <div className="rounded-lg w-4/5 md:w-1/3 mx-auto bg-bubbles bg-cover bg-no-repeat p-8 shadow-xl ">
           <h1 className="my-8 font-extrabold text-xl md:text-3xl text-center text-white">
             Create an Account
           </h1>
@@ -78,7 +78,7 @@ const Register = () => {
                   Register
                 </button>
 
-                <Link href="/register">
+                <Link href="/login">
                   <a className="btn-primary w-1/2 text-center">Login</a>
                 </Link>
               </div>

@@ -11,9 +11,9 @@ const Login = () => {
           backgroundImage:
             "linear-gradient(rgba(139, 92, 246, 0.4),rgba(139, 92, 246, 0.6)),url(imgs/animated.svg)",
         }}
-        className="h-screen pt-16 bg-cover bg-no-repeat"
+        className="h-full md:h-screen py-16 bg-cover bg-no-repeat"
       >
-        <div className="rounded-lg w-1/3 mx-auto bg-bubbles bg-cover bg-no-repeat p-8 shadow-xl ">
+        <div className="rounded-lg w-4/5 md:w-1/3 mx-auto bg-bubbles bg-cover bg-no-repeat p-8 shadow-xl ">
           <h1 className="my-8 font-extrabold text-xl md:text-3xl text-center text-white">
             Login to Continue
           </h1>
@@ -37,6 +37,7 @@ const Login = () => {
                   id="email"
                   type="email"
                   className="px-4 py-3 rounded-md"
+                  placeHolder="john@gmail.com"
                 />
               </div>
 
@@ -52,6 +53,7 @@ const Login = () => {
                   type="password"
                   id="email"
                   className="px-4 py-3 rounded-md"
+                  placeHolder="********"
                 />
               </div>
 
