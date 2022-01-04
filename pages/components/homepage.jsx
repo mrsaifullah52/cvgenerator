@@ -30,9 +30,9 @@ const Homepage = () => {
     <div
       style={{
         backgroundImage:
-          "linear-gradient(rgba(139, 92, 246, 0.4),rgba(139, 92, 246, 0.6)),url(imgs/wave.png)",
+          "linear-gradient(rgba(139, 92, 246, 0.4),rgba(139, 92, 246, 0.6)),url(imgs/animated.svg)",
       }}
-      className="bg-contain bg-no-repeat pb-12"
+      className="bg-cover bg-no-repeat pb-12"
     >
       <div className="mycontainer">
         <h2 className="font-black text-2xl md:text-3xl lg:text-4xl text-center text-indigo-900 mt-8 mb-16 ">

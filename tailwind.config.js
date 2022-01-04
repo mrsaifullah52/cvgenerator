@@ -5,7 +5,11 @@ module.exports = {
     extend: {
       backgroundImage:{
         'hero': "url('/imgs/header.jpg')",
-        'wave': "url('/imgs/wave.png')"
+        'wave': "url('/imgs/wave.png')",
+        'hexagon': "url('/imgs/hexagon.svg')",
+        'animated': "url('/imgs/animated.svg')",
+        'bubbles': "url('/imgs/bubbles.svg')",
+        'shiny': "url('/imgs/shiny.svg')"
       }
     },
   },
