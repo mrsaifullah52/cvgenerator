@@ -1,33 +1,33 @@
 @tailwind base;
 @tailwind components;
-  .mycontainer{
-    @apply w-5/6 mx-auto p-4
-  }
-  .btn{
-    @apply inline-block px-4 py-2 m-1 shadow-md rounded-md
-  }
-  .btn-primary{
-    @apply btn bg-indigo-900 text-white hover:bg-indigo-700
-  }
-  .btn-secondary{
-    @apply btn bg-indigo-200 text-indigo-900 hover:bg-indigo-400
-  }
-  .input_group{
-    @apply flex flex-col w-full m-1 w-full md:w-1/2 lg:w-1/2
-  }
+.mycontainer {
+  @apply w-5/6 mx-auto p-4;
+}
+.btn {
+  @apply inline-block px-4 py-2 m-1 shadow-md rounded-md;
+}
+.btn-primary {
+  @apply btn bg-indigo-900 text-white hover:bg-indigo-700;
+}
+.btn-secondary {
+  @apply btn bg-indigo-200 text-indigo-900 hover:bg-indigo-400;
+}
+.input_group {
+  @apply flex flex-col w-full m-1 w-full md:w-1/2 lg:w-1/2;
+}
 
-  /* resumes page */
-  #text{
-    @apply block
-  }
-  #actions{
-    @apply hidden
-  }
-  .has-tooltip:hover #actions{
-    @apply block z-10
-  }
-  .has-tooltip:hover #text{
-    @apply hidden
-  }
+/* resumes page custom hover */
+#thumbnail {
+  @apply block;
+}
+#actions {
+  @apply hidden;
+}
+.has-tooltip:hover #actions {
+  @apply inline-block z-10;
+}
+.has-tooltip:hover #thumbnail {
+  @apply opacity-5;
+}
 
 @tailwind utilities;

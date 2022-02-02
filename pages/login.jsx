@@ -37,13 +37,13 @@ const Login = () => {
                   id="email"
                   type="email"
                   className="px-4 py-3 rounded-md"
-                  placeHolder="john@gmail.com"
+                  placeHolder="saifullah@gmail.com"
                 />
               </div>
 
               <div className="w-100 flex flex-col my-2">
                 <label
-                  htmlFor="email"
+                  htmlFor="password"
                   className="text-white font-medium text-base"
                 >
                   Your Password

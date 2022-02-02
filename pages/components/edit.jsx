@@ -18,12 +18,12 @@ const Edit = () => {
 
   // inital values
   const initialValues = {
-    fname: "Saif",
-    lname: "Ullah",
-    email: "saifullah@gmail.com",
-    phone: "03449645740",
-    role: "Full Stack Developer",
-    dob: "1998-11-06",
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    role: "",
+    dob: "",
     proImage:
       "https://www.donkey.bike/wp-content/uploads/2020/12/user-member-avatar-face-profile-icon-vector-22965342-300x300.jpg",
 

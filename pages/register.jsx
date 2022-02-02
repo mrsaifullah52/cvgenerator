@@ -37,7 +37,7 @@ const Register = () => {
                   id="name"
                   type="text"
                   className="px-4 py-3 rounded-md"
-                  placeHolder="John Doe"
+                  placeHolder="Saif Ullah"
                 />
               </div>
 
@@ -53,13 +53,13 @@ const Register = () => {
                   id="email"
                   type="email"
                   className="px-4 py-3 rounded-md"
-                  placeHolder="john@gmai.com"
+                  placeHolder="saifullah@gmai.com"
                 />
               </div>
 
               <div className="w-100 flex flex-col my-2">
                 <label
-                  htmlFor="email"
+                  htmlFor="password"
                   className="text-white font-medium text-base"
                 >
                   Your Password

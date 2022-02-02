@@ -11,7 +11,6 @@ const Header = () => {
   const navlinks = [
     { name: "Home", url: "/" },
     { name: "Resumes", url: "/resumes" },
-    { name: "Contact", url: "/contact" },
     { name: "About", url: "/about" },
   ];
 
@@ -73,6 +72,12 @@ const Header = () => {
             {navlinks.map((links, key) => {
               return <List props={links} key={key} />;
             })}
+
+            <li className="hover:bg-indigo-500 w-full transition ease-in-out duration-700 rounded-md">
+              <Link href="/login">
+                <a className="block btn-secondary font-medium">Login</a>
+              </Link>
+            </li>
           </ul>
         </nav>
       </header>
