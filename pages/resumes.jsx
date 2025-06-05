@@ -19,7 +19,7 @@ const Resumes = () => {
       <section>
         <div className="mycontainer">
           <div className="text-center my-4">
-            <h2 className="font-bold text-2xl md:text-4xl text-indigo-900">
+            <h2 className="font-bold text-2xl md:text-4xl text-brand-dark">
               Resume Templates
             </h2>
             <p className="font-mono text-sm md:text-base">
@@ -39,7 +39,7 @@ const Resumes = () => {
 
 const Card = ({ props }) => {
   return (
-    <div className="has-tooltip w-72 h-72 border-2 border-indigo-400 rounded-md shadow-lg mx-1 my-2 relative overflow-hidden">
+    <div className="has-tooltip w-72 h-72 border-2 border-brand rounded-md shadow-lg mx-1 my-2 relative overflow-hidden">
       <div className="" id="thumbnail">
         <Image src={props.img} alt={props.title} className="h-full w-full" />
       </div>

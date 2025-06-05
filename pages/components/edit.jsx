@@ -180,7 +180,7 @@ const Edit = () => {
                   <span>View</span>
                   <FontAwesomeIcon
                     icon={faEye}
-                    className="text-indigo-900 w-6 h-6"
+                    className="text-brand-dark w-6 h-6"
                   />
                 </button>
               </div>
@@ -191,8 +191,8 @@ const Edit = () => {
                   className="w-full absolute top-0 left-0 right-0"
                 >
                   {/* personal */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Personal Details:
                     </legend>
 
@@ -282,8 +282,8 @@ const Edit = () => {
                   </fieldset>
 
                   {/* education */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Education Details:
                     </legend>
                     <FieldArray name="education">
@@ -368,8 +368,8 @@ const Edit = () => {
                   </fieldset>
 
                   {/* skill */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Skills Detail:
                     </legend>
                     <FieldArray name="skill">
@@ -430,8 +430,8 @@ const Edit = () => {
                   </fieldset>
 
                   {/* hoby */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Hobies Detail:
                     </legend>
                     <FieldArray name="hoby">
@@ -474,8 +474,8 @@ const Edit = () => {
                   </fieldset>
 
                   {/* Language */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Languages Detail:
                     </legend>
                     <FieldArray name="language">
@@ -538,8 +538,8 @@ const Edit = () => {
                   </fieldset>
 
                   {/* experience */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Experience Details:
                     </legend>
                     <FieldArray name="experience">
@@ -629,8 +629,8 @@ const Edit = () => {
                   </fieldset>
 
                   {/* project */}
-                  <fieldset className="border-2 border-indigo-900 p-4">
-                    <legend className="text-lg font-semibold text-indigo-500">
+                  <fieldset className="border-2 border-brand-dark p-4">
+                    <legend className="text-lg font-semibold text-brand">
                       Projects Detail:
                     </legend>
                     <FieldArray name="project">
@@ -714,7 +714,7 @@ const Edit = () => {
                   ref={view}
                   className="w-full absolute top-0 left-0 right-0 overflow-scroll invisible"
                 >
-                  <h2 className="text-center text-2xl font-bold my-4 text-indigo-900 ">
+                  <h2 className="text-center text-2xl font-bold my-4 text-brand-dark ">
                     Output of Your Resume
                   </h2>
                   <div
@@ -724,7 +724,7 @@ const Edit = () => {
                     ref={output}
                   >
                     <Cvheader values={values} />
-                    <div className="bg-indigo-500 h-1 w-full"></div>
+                    <div className="bg-brand h-1 w-full"></div>
 
                     <Experience experience={values.experience} />
 
@@ -754,9 +754,9 @@ export default Edit;
 const Cvheader = ({ values }) => {
   return (
     <>
-      <section className="p-4 pt-12 flex flex-row justify-between bg-gray-300 w-full items-center border-r-4 border-indigo-500">
+      <section className="p-4 pt-12 flex flex-row justify-between bg-gray-300 w-full items-center border-r-4 border-brand">
         <div className="w-1/2 flex flex-row items-center ml-20">
-          <div className="bg-white border-indigo-500 border-2 rounded-full w-36 h-36 overflow-hidden">
+          <div className="bg-white border-brand border-2 rounded-full w-36 h-36 overflow-hidden">
             <img
               src={values.proImage}
               id="dpimg"
@@ -766,7 +766,7 @@ const Cvheader = ({ values }) => {
           </div>
 
           <div className="flex flex-col ml-4">
-            <h1 className="font-bold text-5xl text-indigo-500">{`${values.fname} ${values.lname}`}</h1>
+            <h1 className="font-bold text-5xl text-brand">{`${values.fname} ${values.lname}`}</h1>
             <h3 className="font-medium text-2xl">{values.role}</h3>
           </div>
         </div>
@@ -774,21 +774,21 @@ const Cvheader = ({ values }) => {
         <ul className="flex flex-col mr-20">
           <li className="flex flex-row justify-start items-center">
             <FontAwesomeIcon
-              className="text-indigo-500 mr-1 text-2xl"
+              className="text-brand mr-1 text-2xl"
               icon={faEnvelope}
             />
             <span className="font-medium text-xl">{values.email}</span>
           </li>
           <li className="flex flex-row justify-start items-center">
             <FontAwesomeIcon
-              className="text-indigo-500 mr-1 text-2xl"
+              className="text-brand mr-1 text-2xl"
               icon={faPhone}
             />
             <span className="font-medium text-xl">{values.phone}</span>
           </li>
           <li className="flex flex-row justify-start items-center">
             <FontAwesomeIcon
-              className="text-indigo-500 mr-1 text-2xl"
+              className="text-brand mr-1 text-2xl"
               icon={faCalendarDay}
             />
             <span className="font-medium text-xl">{values.dob}</span>
@@ -804,9 +804,9 @@ const Education = ({ education }) => {
   return (
     <>
       {education.length > 0 ? (
-        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-brand">
           <div className="w-1/4">
-            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+            <h2 className="font-bold text-2xl text-brand text-center">
               Education:
             </h2>
           </div>
@@ -828,7 +828,7 @@ const Education = ({ education }) => {
                           {val.degreeEnd}
                         </span>
                       </p>
-                      <hr className="bg-indigo-500 h-0.5" />
+                      <hr className="bg-brand h-0.5" />
                     </div>
                   );
                 })
@@ -847,9 +847,9 @@ const Experience = ({ experience }) => {
   return (
     <>
       {experience.length > 0 ? (
-        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-brand">
           <div className="w-1/4">
-            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+            <h2 className="font-bold text-2xl text-brand text-center">
               Experience:
             </h2>
           </div>
@@ -872,7 +872,7 @@ const Experience = ({ experience }) => {
                         </span>
                       </p>
                       <p>{val.details}</p>
-                      <hr className="bg-indigo-500 h-0.5" />
+                      <hr className="bg-brand h-0.5" />
                     </div>
                   );
                 })
@@ -891,9 +891,9 @@ const Hobbie = ({ hoby }) => {
   return (
     <>
       {hoby.length > 0 ? (
-        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-brand">
           <div className="w-1/4">
-            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+            <h2 className="font-bold text-2xl text-brand text-center">
               Hobbies:
             </h2>
           </div>
@@ -903,7 +903,7 @@ const Hobbie = ({ hoby }) => {
                   return (
                     <div
                       key={val.name}
-                      className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                      className="p-2 m-1 text-white rounded-xl bg-brand"
                     >
                       <p className="uppercase font-medium text-base">
                         {val.name}
@@ -926,9 +926,9 @@ const Language = ({ language }) => {
   return (
     <>
       {language.length > 0 ? (
-        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-brand">
           <div className="w-1/4">
-            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+            <h2 className="font-bold text-2xl text-brand text-center">
               Language:
             </h2>
           </div>
@@ -938,7 +938,7 @@ const Language = ({ language }) => {
                   return (
                     <div
                       key={val.name}
-                      className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                      className="p-2 m-1 text-white rounded-xl bg-brand"
                     >
                       <p className="uppercase font-medium text-base">
                         {val.name}
@@ -962,9 +962,9 @@ const Project = ({ project }) => {
   return (
     <>
       {project.length > 0 ? (
-        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-brand">
           <div className="w-1/4">
-            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+            <h2 className="font-bold text-2xl text-brand text-center">
               Projects:
             </h2>
           </div>
@@ -982,7 +982,7 @@ const Project = ({ project }) => {
                         </a>
                       </p>
                       <p>{val.details}</p>
-                      <hr className="bg-indigo-500 h-0.5" />
+                      <hr className="bg-brand h-0.5" />
                     </div>
                   );
                 })
@@ -1001,9 +1001,9 @@ const Skill = ({ skill }) => {
   return (
     <>
       {skill.length > 0 ? (
-        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-indigo-500">
+        <section className="p-4 pt-12 flex flex-row items-start  w-full border-l-4 border-brand">
           <div className="w-1/4">
-            <h2 className="font-bold text-2xl text-indigo-500 text-center">
+            <h2 className="font-bold text-2xl text-brand text-center">
               Key Skills:
             </h2>
           </div>
@@ -1012,7 +1012,7 @@ const Skill = ({ skill }) => {
               return (
                 <div
                   key={val.name}
-                  className="p-2 m-1 text-white rounded-xl bg-indigo-500"
+                  className="p-2 m-1 text-white rounded-xl bg-brand"
                 >
                   <p className="uppercase font-medium text-base">{val.name}</p>
                   <p className="uppercase text-xs">{val.level}</p>

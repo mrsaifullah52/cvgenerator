@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import ThemeToggle from "./themeToggle";
 
 const Header = () => {
   const [active, setActive] = useState(false);
@@ -16,7 +17,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-indigo-900">
+      <header className="bg-brand-dark">
         <div className="mycontainer flex flex-row justify-between relative">
           <div className="flex flex-col md:flex-row lg:flex-row items-center">
             <Link href="/">
@@ -25,7 +26,7 @@ const Header = () => {
               </a>
             </Link>
 
-            <nav className="hidden bg-indigo-900 md:ml-16 md:block lg:block">
+            <nav className="hidden bg-brand-dark md:ml-16 md:block lg:block">
               <ul className="flex flex-col md:flex-row lg:flex-row items-center">
                 {navlinks.map((links, key) => {
                   return <List props={links} key={key} />;
@@ -35,6 +36,7 @@ const Header = () => {
                     Login
                   </a>
                 </Link>
+                <ThemeToggle />
               </ul>
             </nav>
           </div>
@@ -45,7 +47,7 @@ const Header = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 bg-transparent text-indigo-900"
+              className="h-6 w-6 bg-transparent text-brand-dark"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -65,7 +67,7 @@ const Header = () => {
         <nav
           className={`${
             active ? "" : "hidden"
-          } bg-indigo-900 z-10 absolute w-screen pb-4`}
+          } bg-brand-dark z-10 absolute w-screen pb-4`}
           id="res-menu"
         >
           <ul className={`p-6 flex flex-col  items-center justify-between`}>
@@ -73,10 +75,13 @@ const Header = () => {
               return <List props={links} key={key} />;
             })}
 
-            <li className="hover:bg-indigo-500 w-full transition ease-in-out duration-700 rounded-md">
+            <li className="hover:bg-brand w-full transition ease-in-out duration-700 rounded-md">
               <Link href="/login">
                 <a className="block btn-secondary font-medium">Login</a>
               </Link>
+            </li>
+            <li>
+              <ThemeToggle />
             </li>
           </ul>
         </nav>
@@ -87,7 +92,7 @@ const Header = () => {
 
 const List = ({ props }) => {
   return (
-    <li className="hover:bg-indigo-500 w-full transition ease-in-out duration-700 rounded-md">
+    <li className="hover:bg-brand w-full transition ease-in-out duration-700 rounded-md">
       <Link href={props.url}>
         <a className="block text-white font-medium px-4 py-2">{props.name}</a>
       </Link>
