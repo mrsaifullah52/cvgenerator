@@ -63,7 +63,7 @@ const Login = () => {
                     name="remember"
                     type="checkbox"
                     id="remember"
-                    className="rounded-sm bg-white mr-1 text-indigo-800"
+                    className="rounded-sm bg-white mr-1 text-brand-dark"
                   />
                   <label
                     htmlFor="remember"

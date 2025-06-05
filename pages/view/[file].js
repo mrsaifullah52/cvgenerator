@@ -8,7 +8,7 @@ const File=()=>{
   
 
   return(<> 
-    <figure className="inline-block rounded-lg m-auto border-2 border-indigo-800 overflow-hidden shadow-lg">
+    <figure className="inline-block rounded-lg m-auto border-2 border-brand-dark overflow-hidden shadow-lg">
       <Image src={simple}/>
     </figure>
   </>)

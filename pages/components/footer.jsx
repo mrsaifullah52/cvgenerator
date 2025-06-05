@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
-    <footer className="bg-indigo-900">
+    <footer className="bg-brand-dark">
       <p className="text-center py-4 text-white text-lg">
         Open Source Project by &nbsp;
-        <a href="#" className="text-indigo-400">
+        <a href="#" className="text-brand-light">
           Saif Ullah
         </a>
       </p>

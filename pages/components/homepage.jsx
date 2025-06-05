@@ -30,12 +30,12 @@ const Homepage = () => {
     <div
       style={{
         backgroundImage:
-          "linear-gradient(rgba(139, 92, 246, 0.4),rgba(139, 92, 246, 0.6)),url(imgs/animated.svg)",
+          "linear-gradient(rgba(99, 102, 241, 0.4),rgba(99, 102, 241, 0.6)),url(imgs/animated.svg)",
       }}
       className="bg-cover bg-no-repeat pb-12"
     >
       <div className="mycontainer">
-        <h2 className="font-black text-2xl md:text-3xl lg:text-4xl text-center text-indigo-900 mt-8 mb-16 ">
+        <h2 className="font-black text-2xl md:text-3xl lg:text-4xl text-center text-brand-dark mt-8 mb-16 ">
           Build Your Resume Fast and Easy.
         </h2>
         <LeftBoxs data={data[0]} />
@@ -51,13 +51,13 @@ const LeftBoxs = ({ data }) => {
   return (
     <div className="my-4 flex flex-col md:flex-row lg:flex-row justify-between items-start">
       <div className="hidden md:block lg:block w-full md:w-1/3 lg:w-1/3 text-4xl font-extrabold">
-        <h2 className="bg-indigo-700 text-indigo-500 float-right inline-block px-10 py-8 rounded-xl">
+        <h2 className="bg-brand-dark text-brand-light float-right inline-block px-10 py-8 rounded-xl">
           {data.num}
         </h2>
       </div>
 
       <div className="w-full md:w-2/3 lg:w-2/3 bg-gray-100 rounded-xl p-8 md:py-16 lg:py-16 shadow-md hover:shadow-2xl">
-        <h3 className="font-bold text-xl md:text-2xl lg:text-2xl text-indigo-700">
+        <h3 className="font-bold text-xl md:text-2xl lg:text-2xl text-brand-dark">
           <b className="inline-block md:hidden lg:hidden">{`${data.num}. `}</b>
           {data.heading}
         </h3>
@@ -73,7 +73,7 @@ const RightBoxs = ({ data }) => {
   return (
     <div className="my-4 flex flex-col md:flex-row lg:flex-row justify-between items-start">
       <div className="w-full md:w-2/3 lg:w-2/3 bg-gray-100 rounded-xl p-8 md:py-16 lg:py-16 shadow-md hover:shadow-2xl">
-        <h3 className="font-bold text-xl md:text-2xl lg:text-2xl text-indigo-700">
+        <h3 className="font-bold text-xl md:text-2xl lg:text-2xl text-brand-dark">
           <b className="inline-block md:hidden lg:hidden">{`${data.num}. `}</b>
           {data.heading}
         </h3>
@@ -83,7 +83,7 @@ const RightBoxs = ({ data }) => {
       </div>
 
       <div className="hidden md:block lg:block w-full md:w-1/3 lg:w-1/3 text-4xl font-extrabold ">
-        <h2 className="bg-indigo-700 text-indigo-500 float-left inline-block px-10 py-8 rounded-xl">
+        <h2 className="bg-brand-dark text-brand-light float-left inline-block px-10 py-8 rounded-xl">
           {data.num}
         </h2>
       </div>
